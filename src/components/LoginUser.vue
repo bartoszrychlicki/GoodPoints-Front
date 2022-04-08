@@ -69,6 +69,7 @@
             this.info = 'Cześć ' + response.data.name + '! Witamy w GoodPoints.'
             localStorage.setItem('token', JSON.stringify(token))
             localStorage.setItem('user_id', JSON.stringify(response.data._id))
+            this.$router.go('home')
           })
           .catch((error) => {
             console.error(error)
