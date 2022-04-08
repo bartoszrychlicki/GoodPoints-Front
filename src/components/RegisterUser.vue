@@ -83,8 +83,7 @@
             if (!token) {
               throw new Error('No JWT token in response after registering user')
             }
-            this.info = 'Dodano uzytkownika z ID:' + response.data._id
-            this.info += '<br>token' + token
+            this.info = 'Dodano nowego uzytkownika z ID:' + response.data._id
             localStorage.setItem('token', JSON.stringify(token))
 
             // clearing the user object so the form is empty
