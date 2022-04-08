@@ -50,6 +50,8 @@
 
 <script>
   import axios from 'axios'
+  import lodash from 'lodash'
+
   export default {
     data() {
       return {
@@ -74,7 +76,6 @@
           password: this.user.password,
         }
         // send the user object to the API
-        console.log(user)
         axios
           .post('https://mighty-peak-98894.herokuapp.com/api/users', user)
           .then((response) => {
@@ -82,10 +83,19 @@
             if (!token) {
               throw new Error('No JWT token in response after registering user')
             }
-            this.info = 'Dodano uzytkownika z ID:' + response.data._id
-            this.info += '<br>token' + token
+            this.info = 'Dodano nowego uzytkownika z ID:' + response.data._id
             localStorage.setItem('token', JSON.stringify(token))
-            //this.user = null
+
+            // clearing the user object so the form is empty
+            this.user.name = ''
+            this.user.email = ''
+            this.user.password = ''
+            this.user.password_confirm = ''
+
+            // cleaning errors
+            this.error = null
+
+            // all good, thank you, JWT token saved to localstorage in the browser
           })
           .catch((error) => {
             console.error('Error saving user to DB: ', error)
