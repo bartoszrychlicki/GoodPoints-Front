@@ -49,13 +49,29 @@ export default {
         removeCategory(id) {
             let idx = this._getCategoryIdx(id)
             if (idx !== -1) {
-                categories.splice(idx, 1);
+                axios
+                    .delete(CATEGORIES_SUB_API_URL + "/" + this.categories[idx]._id, {}, {'x-auth-token': localStorage.getItem('token')})
+                    .then((response) => {
+                        categories.splice(idx, 1);
+                    })
+                    .catch((error) => {
+                        // TODO: on 403 redirect to login
+                        // TODO: on other errors redirect to error page
+                    })
             }
         },
         editCategory(id, name) {
             let idx = this._getCategoryIdx(id);
             if (idx !== -1) {
-                this.categories[idx].name = name;
+                axios
+                    .put(CATEGORIES_SUB_API_URL + "/" + this.categories[idx]._id, {name: name, user: USER_ID}, {'x-auth-token': localStorage.getItem('token')})
+                    .then((response) => {
+                        this.categories[idx].name = name;
+                    })
+                    .catch((error) => {
+                        // TODO: on 403 redirect to login
+                        // TODO: on other errors redirect to error page
+                    })
             }
         }
     },
