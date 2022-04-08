@@ -47,7 +47,7 @@
 
   @media (hover: hover) {
     a:hover {
-      background-color: hsla(160, 100%, 37%, 0.2);
+      background-color: hsla(0, 0%, 0%, 0.2);
     }
   }
 
@@ -59,7 +59,7 @@
   }
 
   nav a.router-link-exact-active {
-    color: var(--color-text);
+    color: black;
   }
 
   nav a.router-link-exact-active:hover {

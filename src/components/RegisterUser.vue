@@ -1,12 +1,24 @@
 <template>
   <form>
-    <label for="name">Imię </label><input type="text" name="name" />
-    <label for="email">Email </label><input type="email" name="email" />
-    <label for="password">Hasło </label
-    ><input type="password" name="password" />
-    <label for="passsword_confirm">Powtórz hasło </label>
-    <input type="password" name="password_confirm" />
-    <input type="submit" value="Zarejestruj się" />
+    <div class="mb-3">
+      <label for="name" class="form-label">Imię:</label>
+      <input class="form-control" type="text" name="name" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="email">E-mail:</label>
+      <input class="form-control" type="email" name="email" />
+    </div>
+    <div class="mb-3 row">
+      <div class="col">
+        <label class="form-label" for="password">Hasło </label>
+        <input class="form-control" type="password" name="password" />
+      </div>
+      <div class="col">
+        <label class="form-label" for="passsword_confirm">Powtórz hasło </label>
+        <input class="form-control" type="password" name="password_confirm" />
+      </div>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Zarejestruj się" />
   </form>
 </template>
 
