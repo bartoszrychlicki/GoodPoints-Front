@@ -1,27 +1,45 @@
 <script>
 import CategoryManager from '../components/CategoryManager.vue'
-import { ref } from 'vue'
+import axios from 'axios'
+
+const USER_ID = localStorage.getItem('user_id');
+const CATEGORIES_SUB_API_URL = import.meta.env.VITE_API_BASE_URL + "/categories";
 
 export default {
+    mounted() {
+        axios
+          .get(CATEGORIES_SUB_API_URL, {}, {'x-auth-token': localStorage.getItem('token')})
+          .then((response) => {
+            this.categories = response.data;
+          })
+          .catch((error) => {
+            // TODO: on 403 redirect to login
+            // TODO: on other errors redirect to error page
+          })
+    },
     data() {
         return {
             nextId: 4,
             categories: [
-                { id: 1, name: "One" },
-                { id: 2, name: "Two" },
-                { id: 3, name: "Three" }
             ],
         }
     },
     methods: {
         addCategory(name) {
-            let newCat = {id: this.nextId++, name: name};
-            this.categories.push(newCat);
+            axios
+                .post(CATEGORIES_SUB_API_URL, {name: name, user: USER_ID}, {'x-auth-token': localStorage.getItem('token')})
+                .then((response) => {
+                    this.categories.push(response.data);
+                })
+                .catch((error) => {
+                    // TODO: on 403 redirect to login
+                    // TODO: on other errors redirect to error page
+                })
         },
         _getCategoryIdx(id) {
             let idx = -1;
             for (let i = 0; i < this.categories.length; i++) {
-                if (this.categories[i].id === id) {
+                if (this.categories[i]._id === id) {
                     idx = i;
                     break;
                 }
