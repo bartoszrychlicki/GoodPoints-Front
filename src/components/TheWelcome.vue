@@ -9,7 +9,6 @@
 </script>
 
 <template>
-  <RegisterUser />
   <WelcomeItem>
     <template #icon>
       <DocumentationIcon />
