@@ -7,7 +7,7 @@ function addCategory(name) {
     categories.value.push(newCat);
 }
 
-function removeCategory(id) {
+function _getCategoryIdx(id) {
     let idx = -1;
     for (let i = 0; i < categories.value.length; i++) {
         if (categories.value[i].id === id) {
@@ -15,8 +15,20 @@ function removeCategory(id) {
             break;
         }
     }
+    return idx;
+}
+
+function removeCategory(id) {
+    let idx = _getCategoryIdx(id)
     if (idx !== -1) {
         categories.value.splice(idx, 1);
+    }
+}
+
+function editCategory(id, name) {
+    let idx = _getCategoryIdx(id);
+    if (idx !== -1) {
+        categories.value[idx].name = name;
     }
 }
 
@@ -36,6 +48,7 @@ const categories = ref([
         :categories="categories"
         @category-add="addCategory"
         @category-remove="removeCategory"
+        @category-edit="editCategory"
     />
   </main>
 </template>
