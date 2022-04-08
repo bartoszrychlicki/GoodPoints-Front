@@ -27,6 +27,6 @@ export default {
         <CategoryInput @save="save" :name="this.name" />
     </div>
     <div v-else>
-        <span @click="isEdit = true">{{ this.name }}</span><IconTrash @click="$emit('remove')" />
+        <span @click="isEdit = true">{{ this.name }}</span><span style="float:right;"><IconTrash @click="$emit('remove')" /></span>
     </div>    
 </template>

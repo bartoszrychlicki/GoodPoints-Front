@@ -24,5 +24,5 @@ export default {
 </script>
 
 <template>
-    <input type="text" v-model="inputVal" v-on:keyup.enter="save"/><IconAdd @click="save"/>
+    <input type="text" v-model="inputVal" v-on:keyup.enter="save"/><span style="float:right;"><IconAdd @click="save"/></span>
 </template>

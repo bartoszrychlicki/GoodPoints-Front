@@ -23,18 +23,20 @@ export default {
 <template>
   <div class="categories">
     <h1 class="green">Categories</h1>
-    <div v-for="category in categories" :key="category.name">
-        <CategoryItem
+    <ul class="list-group">
+        <li v-for="category in categories" class="list-group-item">
+            <CategoryItem
             :name="category.name"
             @remove="$emit('category-remove', category.id)"
             @save="(name) => { $emit('category-edit', category.id, name); }"
         />
-    </div>
-    <div id="new-category-container">
-        <CategoryInput
+        </li>
+        <li class="list-group-item">
+            <CategoryInput
             ref="newCategoryInput"
             @save="addCategory"
         />
-    </div>    
+        </li>
+    </ul>
   </div>
 </template>
