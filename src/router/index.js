@@ -28,7 +28,8 @@ const router = createRouter({
       }
     },
     {
-      path: '/home',
+      path: '/',
+      alias: '/home',
       name: 'home',
       component: HomeView,
       meta: {
