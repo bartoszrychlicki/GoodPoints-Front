@@ -54,25 +54,21 @@
     },
     methods: {
       onSubmit() {
-        console.log('on submit')
         this.error = ''
         this.info = ''
         axios
           .post(import.meta.env.VITE_API_BASE_URL + "/auth", this.user)
           .then((response) => {
-            console.log(response)
             const token = response.headers['x-auth-token']
-            console.log(token)
             if (!token) {
               throw new Error('No JWT token in response after registering user')
             }
             this.info = 'Cześć ' + response.data.name + '! Witamy w GoodPoints.'
             localStorage.setItem('token', JSON.stringify(token))
-            localStorage.setItem('user_id', JSON.stringify(response.data._id))
+            localStorage.setItem('user_id', response.data._id)
             this.$router.replace('home')
           })
           .catch((error) => {
-            console.error(error)
             if (error.response) {
               this.error = error.response.data
             }
