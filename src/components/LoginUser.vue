@@ -58,7 +58,7 @@
         this.error = ''
         this.info = ''
         axios
-          .post('https://mighty-peak-98894.herokuapp.com/api/auth', this.user)
+          .post(import.meta.env.VITE_API_BASE_URL + "/auth", this.user)
           .then((response) => {
             console.log(response)
             const token = response.headers['x-auth-token']

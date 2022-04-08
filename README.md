@@ -14,7 +14,10 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ```sh
 npm install
+cp env.dist .env
 ```
+
+Fill all variable values in .env
 
 ### Compile and Hot-Reload for Development
 
