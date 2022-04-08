@@ -66,7 +66,7 @@ export default {
                 axios
                     .put(CATEGORIES_SUB_API_URL + "/" + this.categories[idx]._id, {name: name, user: USER_ID}, {'x-auth-token': localStorage.getItem('token')})
                     .then((response) => {
-                        this.categories[idx].name = name;
+                        this.categories[idx] = response.data;
                     })
                     .catch((error) => {
                         // TODO: on 403 redirect to login
