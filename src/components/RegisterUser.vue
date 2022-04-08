@@ -1,4 +1,6 @@
 <template>
+  <div v-if="info" class="alert alert-success" role="alert">{{ info }}</div>
+  <div v-if="error" class="alert alert-danger" role="alert">{{ error }}</div>
   <form @submit.prevent="onSubmit">
     <div class="mb-3">
       <label for="name" class="form-label">Imię:</label>
@@ -47,13 +49,16 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     data() {
       return {
         user: {
-          name: '',
-          email: '',
+          name: null,
+          email: null,
         },
+        info: null,
+        error: null,
       }
     },
     methods: {
@@ -70,6 +75,25 @@
         }
         // send the user object to the API
         console.log(user)
+        axios
+          .post('https://mighty-peak-98894.herokuapp.com/api/users', user)
+          .then((response) => {
+            const token = response.headers['x-auth-token']
+            if (!token) {
+              throw new Error('No JWT token in response after registering user')
+            }
+            this.info = 'Dodano uzytkownika z ID:' + response.data._id
+            this.info += '<br>token' + token
+            localStorage.setItem('token', JSON.stringify(token))
+            //this.user = null
+          })
+          .catch((error) => {
+            console.error('Error saving user to DB: ', error)
+            if (error.response) {
+              this.error = error.response.data
+              console.log(error.response.data) // => the response payload
+            }
+          })
       },
     },
   }
