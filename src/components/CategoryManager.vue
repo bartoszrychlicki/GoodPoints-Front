@@ -27,8 +27,8 @@ export default {
         <li v-for="category in categories" class="list-group-item">
             <CategoryItem
             :name="category.name"
-            @remove="$emit('category-remove', category.id)"
-            @save="(name) => { $emit('category-edit', category.id, name); }"
+            @remove="$emit('category-remove', category._id)"
+            @save="(name) => { $emit('category-edit', category._id, name); }"
         />
         </li>
         <li class="list-group-item">
