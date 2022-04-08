@@ -1,7 +1,7 @@
 <template>
   <div v-if="info" class="alert alert-success" role="alert">{{ info }}</div>
   <div v-if="error" class="alert alert-danger" role="alert">{{ error }}</div>
-  <form @submit.prevent="onSubmit" v-if="loggedIn">
+  <form @submit.prevent="onSubmit" v-if="!loggedIn">
     <div class="mb-3">
       <label class="form-label" for="email">E-mail:</label>
       <input
@@ -46,10 +46,11 @@
     },
     mounted() {
       // check if user is logged in
-      const token = localStorage.getItem(token)
-      if (token !== null) {
+      const token = localStorage.getItem('token')
+      if (token != null) {
         this.loggedIn = true
       }
+      console.log(this.loggedIn)
     },
     methods: {
       onSubmit() {
