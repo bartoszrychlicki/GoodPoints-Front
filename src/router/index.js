@@ -12,6 +12,14 @@ const router = createRouter({
       component: LoginView
     },
     {
+      path: '/logout',
+      name: 'logout',
+      redirect: to => {
+        localStorage.clear();
+        return { path: "/login" };
+      }
+    },
+    {
       path: '/edit',
       name: 'edit',
       component: EditView,
@@ -20,7 +28,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: HomeView,
       meta: {
