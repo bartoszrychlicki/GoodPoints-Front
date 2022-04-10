@@ -50,14 +50,13 @@
       if (token != null) {
         this.loggedIn = true
       }
-      console.log(this.loggedIn)
     },
     methods: {
       onSubmit() {
         this.error = ''
         this.info = ''
         axios
-          .post(import.meta.env.VITE_API_BASE_URL + "/auth", this.user)
+          .post(import.meta.env.VITE_API_BASE_URL + '/auth', this.user)
           .then((response) => {
             const token = response.headers['x-auth-token']
             if (!token) {
