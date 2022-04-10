@@ -67,7 +67,8 @@
       onSubmit() {
         // check if password match
         if (this.user.password != this.user.password_confirm) {
-          console.log('Password not match')
+          this.error = 'Hasła nie są takie same'
+          return
         }
         // crete object to store in DB
         let user = {
@@ -77,7 +78,7 @@
         }
         // send the user object to the API
         axios
-          .post('https://mighty-peak-98894.herokuapp.com/api/users', user)
+          .post(import.meta.env.VITE_API_BASE_URL + '/users', user)
           .then((response) => {
             const token = response.headers['x-auth-token']
             if (!token) {
