@@ -1,6 +1,6 @@
 <script>
-import CategoryItem from './CategoryItem.vue';
-import CategoryInput from './CategoryInput.vue';
+import Item from './Item.vue';
+import Input from './Input.vue';
 
 export default {
     props: {
@@ -16,7 +16,7 @@ export default {
         }
     },
     emits: ['category-remove', 'category-add', 'category-edit'],
-    components: {CategoryInput, CategoryItem}
+    components: {Input, Item}
 }
 </script>
 
@@ -25,14 +25,14 @@ export default {
     <h1 class="green">Categories</h1>
     <ul class="list-group">
         <li v-for="category in categories" class="list-group-item">
-            <CategoryItem
+            <Item
             :name="category.name"
             @remove="$emit('category-remove', category._id)"
             @save="(name) => { $emit('category-edit', category._id, name); }"
         />
         </li>
         <li class="list-group-item">
-            <CategoryInput
+            <Input
             ref="newCategoryInput"
             @save="addCategory"
         />

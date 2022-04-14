@@ -1,5 +1,5 @@
 <script>
-import CategoryManager from '../components/CategoryManager.vue'
+import CategoryManager from '../components/category/Manager.vue'
 import axios from 'axios'
 
 const USER_ID = localStorage.getItem('user_id');

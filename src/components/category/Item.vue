@@ -1,6 +1,6 @@
 <script>
 import IconTrash from '@/components/icons/IconTrash.vue'
-import CategoryInput from "./CategoryInput.vue"
+import Input from "./Input.vue"
 
 export default {
     props: {
@@ -12,7 +12,7 @@ export default {
         };
     },
     emits: ["remove", "save"],
-    components: { CategoryInput, IconTrash },
+    components: { Input, IconTrash },
     methods: {
         save(name) {
             this.$emit('save', name)
@@ -24,7 +24,7 @@ export default {
 
 <template>
     <div v-if="isEdit">
-        <CategoryInput @save="save" :name="this.name" />
+        <Input @save="save" :name="this.name" />
     </div>
     <div v-else>
         <span @click="isEdit = true">{{ this.name }}</span><span style="float:right;"><IconTrash @click="$emit('remove')" /></span>
