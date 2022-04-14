@@ -5,10 +5,17 @@ import axios from 'axios'
 const USER_ID = localStorage.getItem('user_id');
 const CATEGORIES_SUB_API_URL = import.meta.env.VITE_API_BASE_URL + "/categories";
 
+const defaultRequestConfig = {
+    headers: {
+        'x-auth-token': localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+    }
+};
+
 export default {
     mounted() {
         axios
-          .get(CATEGORIES_SUB_API_URL, {}, {'x-auth-token': localStorage.getItem('token')})
+          .get(CATEGORIES_SUB_API_URL, defaultRequestConfig)
           .then((response) => {
             this.categories = response.data;
           })
@@ -27,7 +34,7 @@ export default {
     methods: {
         addCategory(name) {
             axios
-                .post(CATEGORIES_SUB_API_URL, {name: name, user: USER_ID}, {'x-auth-token': localStorage.getItem('token')})
+                .post(CATEGORIES_SUB_API_URL, {name: name, user: USER_ID}, defaultRequestConfig)
                 .then((response) => {
                     this.categories.push(response.data);
                 })
@@ -50,9 +57,9 @@ export default {
             let idx = this._getCategoryIdx(id)
             if (idx !== -1) {
                 axios
-                    .delete(CATEGORIES_SUB_API_URL + "/" + this.categories[idx]._id, {}, {'x-auth-token': localStorage.getItem('token')})
+                    .delete(CATEGORIES_SUB_API_URL + "/" + this.categories[idx]._id, defaultRequestConfig)
                     .then((response) => {
-                        categories.splice(idx, 1);
+                        this.categories.splice(idx, 1);
                     })
                     .catch((error) => {
                         // TODO: on 403 redirect to login
@@ -64,7 +71,7 @@ export default {
             let idx = this._getCategoryIdx(id);
             if (idx !== -1) {
                 axios
-                    .put(CATEGORIES_SUB_API_URL + "/" + this.categories[idx]._id, {name: name, user: USER_ID}, {'x-auth-token': localStorage.getItem('token')})
+                    .put(CATEGORIES_SUB_API_URL + "/" + this.categories[idx]._id, {name: name, user: USER_ID}, defaultRequestConfig)
                     .then((response) => {
                         this.categories[idx] = response.data;
                     })
