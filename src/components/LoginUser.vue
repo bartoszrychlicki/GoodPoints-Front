@@ -63,7 +63,7 @@
               throw new Error('No JWT token in response after registering user')
             }
             this.info = 'Cześć ' + response.data.name + '! Witamy w GoodPoints.'
-            localStorage.setItem('token', JSON.stringify(token))
+            localStorage.setItem('token', token)
             localStorage.setItem('user_id', response.data._id)
             this.$router.replace('home')
           })
