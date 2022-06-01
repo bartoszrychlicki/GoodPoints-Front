@@ -4,8 +4,8 @@
 
 <template>
   <header>
-    <h1>GoodPoints</h1>
-    <div class="wrapper">
+    <h1 class="logo">GoodPoints</h1>
+    <div class="nav">
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/edit">Edytuj</RouterLink>
