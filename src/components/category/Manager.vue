@@ -21,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <div class="categories">
+  <div class="categories card mx-auto mt-4 p-4">
     <h1 class="green">Categories</h1>
     <ul class="list-group">
         <li v-for="category in categories" class="list-group-item">
@@ -40,3 +40,9 @@ export default {
     </ul>
   </div>
 </template>
+
+<style scoped>
+.categories {
+    width: 500px;
+}
+</style>
