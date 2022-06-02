@@ -3,7 +3,7 @@
   <div v-if="error" class="alert alert-danger" role="alert">{{ error }}</div>
   <form @submit.prevent="onSubmit">
     <div class="mb-3">
-      <label for="name" class="form-label">Imię:</label>
+      <label for="name" class="form-label">Name:</label>
       <input
         v-model="user.name"
         class="form-control"
@@ -24,7 +24,7 @@
     </div>
     <div class="mb-3 row">
       <div class="col">
-        <label class="form-label" for="password">Hasło </label>
+        <label class="form-label" for="password">Password: </label>
         <input
           v-model="user.password"
           class="form-control"
@@ -34,7 +34,7 @@
         />
       </div>
       <div class="col">
-        <label class="form-label" for="passsword_confirm">Powtórz hasło </label>
+        <label class="form-label" for="passsword_confirm">Confirm password: </label>
         <input
           v-model="user.password_confirm"
           class="form-control"
@@ -44,7 +44,7 @@
         />
       </div>
     </div>
-    <input class="btn btn-primary" type="submit" value="Zarejestruj się" />
+    <input class="btn btn-primary" type="submit" value="Rgister" />
   </form>
 </template>
 
@@ -67,7 +67,7 @@
       onSubmit() {
         // check if password match
         if (this.user.password != this.user.password_confirm) {
-          this.error = 'Hasła nie są takie same'
+          this.error = 'The passwords do not match.'
           return
         }
         // crete object to store in DB
@@ -84,7 +84,7 @@
             if (!token) {
               throw new Error('No JWT token in response after registering user')
             }
-            this.info = 'Dodano nowego uzytkownika z ID:' + response.data._id
+            this.info = 'A new user with ID: ' + response.data._id + 'has been added.'
             localStorage.setItem('token', JSON.stringify(token))
 
             // clearing the user object so the form is empty

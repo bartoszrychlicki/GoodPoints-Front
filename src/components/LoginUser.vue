@@ -14,7 +14,7 @@
     </div>
     <div class="mb-3 row">
       <div class="col">
-        <label class="form-label" for="password">Hasło </label>
+        <label class="form-label" for="password">Password: </label>
         <input
           v-model="user.password"
           class="form-control"
@@ -24,9 +24,9 @@
         />
       </div>
     </div>
-    <input class="btn btn-primary" type="submit" value="Zaloguj się" />
+    <input class="btn btn-primary" type="submit" value="Log in" />
   </form>
-  <div v-else>Jesteś juz zalogowany.</div>
+  <div v-else>You are already logged in.</div>
 </template>
 
 <script>
@@ -62,7 +62,7 @@
             if (!token) {
               throw new Error('No JWT token in response after registering user')
             }
-            this.info = 'Cześć ' + response.data.name + '! Witamy w GoodPoints.'
+            this.info = 'Hi ' + response.data.name + '! Welcome to GoodPoints.'
             localStorage.setItem('token', token)
             localStorage.setItem('user_id', response.data._id)
             this.$router.replace('home')

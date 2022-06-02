@@ -8,8 +8,8 @@
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/edit">Edytuj</RouterLink>
-        <RouterLink to="/logout">Wyloguj</RouterLink>
+        <RouterLink to="/edit">Edit</RouterLink>
+        <RouterLink to="/logout">Log out</RouterLink>
       </nav>
     </div>
   </header>
