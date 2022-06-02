@@ -46,7 +46,12 @@ export default {
         }
     },
     methods: {
-        
+        editTask(task) {
+            
+        },
+        deleteTask(task) {
+            console.log(task);
+        }
     },
     components: {Save, IconTrash, IconAdd}
 }
@@ -67,12 +72,12 @@ export default {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="task in tasks" :key="task.id">
+                <tr v-for="task in tasks" :key="task._id">
                     <td>{{ task.name }}</td>
                     <td>{{ task.category.name }}</td>
                     <td>
-                        <IconAdd />
-                        <IconTrash />
+                        <IconAdd @click="editTask(task)"/>
+                        <IconTrash @click="deleteTask(task)"/>
                     </td>
                 </tr>
             </tbody>
