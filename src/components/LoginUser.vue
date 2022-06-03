@@ -3,7 +3,7 @@
   <div v-if="error" class="alert alert-danger" role="alert">{{ error }}</div>
   <form @submit.prevent="onSubmit" v-if="!loggedIn">
     <div class="mb-3">
-      <label class="form-label" for="email">E-mail:</label>
+      <label class="form-label" for="email">E-mail</label>
       <input
         v-model="user.email"
         class="form-control"
@@ -14,7 +14,7 @@
     </div>
     <div class="mb-3 row">
       <div class="col">
-        <label class="form-label" for="password">Hasło </label>
+        <label class="form-label" for="password">Password </label>
         <input
           v-model="user.password"
           class="form-control"
@@ -24,9 +24,9 @@
         />
       </div>
     </div>
-    <input class="btn btn-primary" type="submit" value="Zaloguj się" />
+    <input class="btn btn-primary" type="submit" value="Log in" />
   </form>
-  <div v-else>Jesteś juz zalogowany.</div>
+  <div v-else>You are logged in</div>
 </template>
 
 <script>
