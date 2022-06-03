@@ -24,6 +24,20 @@ export default {
             // TODO: on other errors redirect to error page
           })
   },
+  props: {
+        id: {
+            type: String,
+            default: ''
+        },
+        name: {
+            type: String,
+            default: ''
+        },
+        category: {
+            type: String,
+            default: ''
+        }
+    },
   data() {
         return {
             categories: [],
@@ -31,7 +45,7 @@ export default {
                 name: '',
                 category: '',// multi select box values
             },
-            formError: ''
+            formError: '',
         }
     },
     methods: {

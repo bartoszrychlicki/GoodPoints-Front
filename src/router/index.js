@@ -38,12 +38,21 @@ const router = createRouter({
       },
     },
     {
-      path: '/save-tasks',
+      path: '/save-tasks/',
       name: 'save-tasks',
       component: SaveTasks,
       meta: {
         requiresAuth: true,
       },
+    },
+    {
+      path: '/edit-task',
+      name: 'edit-task',
+      component: SaveTasks,
+      meta: {
+        requiresAuth: true,
+      },
+      props:true
     },
     {
       path: '/',

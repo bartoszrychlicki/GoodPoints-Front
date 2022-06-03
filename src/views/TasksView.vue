@@ -75,7 +75,7 @@ export default {
     <div class="tasks card mx-auto mt-4 p-4">
       <div class="flex" v-if="tasks.length">
         <h1 class="green float-start">Tasks</h1>
-        <RouterLink to="/save-tasks" class="btn btn-primary float-end">Add New Task</RouterLink>
+        <RouterLink to="/save-tasks" class="btn btn-primary btn-sm float-end">Add New Task</RouterLink>
       </div>
         <table class="table table-bordered" v-if="tasks.length">
             <thead>
@@ -90,15 +90,20 @@ export default {
                     <td>{{ task.name }}</td>
                     <td>{{ task.category.name }}</td>
                     <td>
-                        <IconAdd @click="editTask(task)"/>
-                        <IconTrash @click="deleteTask(task)"/>
+                        <RouterLink :to="{ name: 'edit-task', params: {id: task._id, name: task.name, category: task.category._id } }" class="btn btn-primary btn-sm float-end">
+                            <IconAdd />
+                        </RouterLink>
+                        <!-- <IconAdd /> -->
+                        <button class="btn btn-danger btn-sm float-start" @click="deleteTask(task)">
+                            <IconTrash />
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
     <div v-else>
         <p>Tasks not found</p>
-        <RouterLink to="/save-tasks" class="btn btn-primary">Add New Task</RouterLink>
+        <RouterLink to="/save-tasks" class="btn btn-primary btn-sm">Add New Task</RouterLink>
     </div>
   </div>
 </template>
