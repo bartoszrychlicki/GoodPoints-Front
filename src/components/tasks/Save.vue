@@ -61,12 +61,7 @@ export default {
                 .catch((error) => {
                     // TODO: on 403 redirect to login
                     // TODO: on other errors redirect to error page
-                    // console.log(error.message);
-                    // console.log(response);
                     if (error.response) {
-                        // console.log(error.response.data);
-                        // console.log(error.response.status);
-                        // console.log(error.response.headers);
                         this.formError = error.response.data
                     }
 
