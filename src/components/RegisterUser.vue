@@ -24,7 +24,7 @@
     </div>
     <div class="mb-3 row">
       <div class="col">
-        <label class="form-label" for="password">Password: </label>
+        <label class="form-label" for="password">Password </label>
         <input
           v-model="user.password"
           class="form-control"
@@ -34,7 +34,9 @@
         />
       </div>
       <div class="col">
-        <label class="form-label" for="passsword_confirm">Confirm password: </label>
+        <label class="form-label" for="passsword_confirm"
+          >Repeat password
+        </label>
         <input
           v-model="user.password_confirm"
           class="form-control"
@@ -44,7 +46,7 @@
         />
       </div>
     </div>
-    <input class="btn btn-primary" type="submit" value="Rgister" />
+    <input class="btn btn-primary" type="submit" value="Register" />
   </form>
 </template>
 
