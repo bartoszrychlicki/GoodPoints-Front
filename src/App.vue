@@ -55,6 +55,9 @@
   a {
     text-decoration: none !important;
   }
+  .navbar {
+        padding-top: 0px !important;
+  }
 
   a,
   .green {
@@ -73,7 +76,7 @@
     width: 100%;
     font-size: 12px;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 0px;
   }
 
   nav a.router-link-exact-active {
@@ -128,7 +131,7 @@
       font-size: 1rem;
 
       padding: 1rem 0;
-      margin-top: 1rem;
+      margin-top: 0 px;
     }
   }
 </style>
