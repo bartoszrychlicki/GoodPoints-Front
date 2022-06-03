@@ -4,8 +4,13 @@
 </script>
 
 <template>
-  <main>
+  <main class="forms card mx-auto mt-4 p-4">
     <RegisterUser />
     <LoginUser />
   </main>
 </template>
+<style scoped>
+.forms {
+    width: 500px;
+}
+</style>

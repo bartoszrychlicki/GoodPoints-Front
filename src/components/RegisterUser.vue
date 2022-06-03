@@ -69,7 +69,7 @@
       onSubmit() {
         // check if password match
         if (this.user.password != this.user.password_confirm) {
-          this.error = 'Hasła nie są takie same'
+          this.error = 'The passwords do not match.'
           return
         }
         // crete object to store in DB
@@ -86,7 +86,7 @@
             if (!token) {
               throw new Error('No JWT token in response after registering user')
             }
-            this.info = 'Dodano nowego uzytkownika z ID:' + response.data._id
+            this.info = 'A new user with ID: ' + response.data._id + 'has been added.'
             localStorage.setItem('token', JSON.stringify(token))
 
             // clearing the user object so the form is empty

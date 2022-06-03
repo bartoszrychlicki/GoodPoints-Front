@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import EditView from '../views/EditView.vue'
+import TasksView from '../views/TasksView.vue'
+import SaveTasks from '../components/tasks/Save.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +25,22 @@ const router = createRouter({
       path: '/edit',
       name: 'edit',
       component: EditView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/tasks',
+      name: 'tasks',
+      component: TasksView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/save-tasks',
+      name: 'save-tasks',
+      component: SaveTasks,
       meta: {
         requiresAuth: true,
       },

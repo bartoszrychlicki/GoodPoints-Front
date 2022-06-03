@@ -26,7 +26,7 @@
     </div>
     <input class="btn btn-primary" type="submit" value="Log in" />
   </form>
-  <div v-else>You are logged in</div>
+  <div v-else>You are already logged in.</div>
 </template>
 
 <script>
@@ -62,7 +62,7 @@
             if (!token) {
               throw new Error('No JWT token in response after registering user')
             }
-            this.info = 'Cześć ' + response.data.name + '! Witamy w GoodPoints.'
+            this.info = 'Hi ' + response.data.name + '! Welcome to GoodPoints.'
             localStorage.setItem('token', token)
             localStorage.setItem('user_id', response.data._id)
             this.$router.replace('home')
