@@ -82,11 +82,13 @@ export default {
                 <tr>
                     <th>Task Name</th>
                     <th>Category Name</th>
+                    <th>Task Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="task in tasks" :key="task._id">
+                    <td>{{ task.name }}</td>
                     <td>{{ task.name }}</td>
                     <td>{{ task.category.name }}</td>
                     <td>

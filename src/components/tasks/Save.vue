@@ -42,8 +42,8 @@ export default {
         return {
             categories: [],
             form : {
-                name: '',
-                category: '',// multi select box values
+                name: this.name ? this.name : '',
+                category: this.category ? this.category : '',// multi select box values
             },
             formError: '',
         }
@@ -53,10 +53,8 @@ export default {
             axios
                 .post(TASKS_API_URL, {name: this.form.name, user: USER_ID, category: this.form.category}, defaultRequestConfig)
                 .then((response) => {
-                    // this.categories.push(response.data);
-                    console.log("task added succuful.");
-                    console.log(response);
-                    
+                    alert("new task added.");
+                    this.$router.push({ name: "tasks"})
                 })
                 .catch((error) => {
                     // TODO: on 403 redirect to login
@@ -66,13 +64,28 @@ export default {
                     }
 
                 })
+        },
+        updateTask() {
+          console.log('update task');
+          axios.put(TASKS_API_URL + "/" + this.id, {name: this.form.name, user: USER_ID, category: this.form.category}, defaultRequestConfig)
+              .then((response) => {
+                  alert('task updated')
+                  this.$router.push({ name: "tasks"})
+              })
+              .catch((error) => {
+                  // TODO: on 403 redirect to login
+                  // TODO: on other errors redirect to error page
+                  console.log(error.response.data);
+                  this.formError = error.response.data
+              })
         }
     },
 };
 </script>
 <template>
   <div class="save-task card mx-auto mt-4 p-4">
-    <h1 class="green">Add New Tasks</h1>
+    <h1 class="green">
+      {{ this.id ? "Update" : "Add New"}} Tasks</h1>
     <div class="mb-3 mt-3" v-if="formError">
       <p class="text-danger">{{ formError }}</p>
     </div>
@@ -96,7 +109,8 @@ export default {
         </option>
       </select>
     </div>
-    <button type="submit" class="btn btn-primary" @click="addTask">Save</button>
+    <button type="submit" class="btn btn-primary" @click="addTask" v-if="this.id == ''">Save</button>
+    <button type="submit" class="btn btn-primary" @click="updateTask" v-else>Update</button>
   </div>
   
 </template>
