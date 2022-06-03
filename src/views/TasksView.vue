@@ -50,7 +50,21 @@ export default {
             
         },
         deleteTask(task) {
-            console.log(task);
+            if (task) {
+                console.log(task);
+                axios
+                    .delete(TASKS_API_URL + "/" + task._id, defaultRequestConfig)
+                    .then((response) => {
+                        this.tasks.splice(task._id, 1);
+                    })
+                    .catch((error) => {
+                        // TODO: on 403 redirect to login
+                        // TODO: on other errors redirect to error page
+                        console.log(error.response.data);
+                    })
+            } else {
+                console.log('taks not deleted');
+            }
         }
     },
     components: {Save, IconTrash, IconAdd}
