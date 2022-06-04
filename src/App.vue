@@ -10,7 +10,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="mynavbar">
-      <ul class="navbar-nav me-auto" v-if="this.$route.meta.requiresAuth === true">
+      <ul class="navbar-nav me-auto" v-if="this.$router.meta.requiresAuth === true">
         <li class="nav-item">
           <RouterLink to="/">Home</RouterLink>
         </li>
