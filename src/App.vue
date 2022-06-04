@@ -15,7 +15,7 @@
           <RouterLink to="/">Home</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink to="/edit">Categories</RouterLink>
+          <RouterLink to="/categories">Categories</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink to="/tasks">Tasks</RouterLink>

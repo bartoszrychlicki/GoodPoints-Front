@@ -1,5 +1,7 @@
 <script>
-import CategoryManager from '../components/category/Manager.vue'
+// import CategoryManager from '../components/category/Manager.vue'
+import Item from '../components/category/Item.vue';
+import Input from '../components/category/Input.vue';
 import axios from 'axios'
 
 const USER_ID = localStorage.getItem('user_id');
@@ -37,6 +39,7 @@ export default {
                 .post(CATEGORIES_SUB_API_URL, {name: name, user: USER_ID}, defaultRequestConfig)
                 .then((response) => {
                     this.categories.push(response.data);
+                    this.$refs.newCategoryInput.clear();
                 })
                 .catch((error) => {
                     // TODO: on 403 redirect to login
@@ -82,17 +85,34 @@ export default {
             }
         }
     },
-    components: {CategoryManager}
+    emits: ['category-remove', 'category-add', 'category-edit'],
+    components: {Input, Item}
 }
 </script>
 
 <template>
-  <main>
-    <CategoryManager
-        :categories="categories"
-        @category-add="addCategory"
-        @category-remove="removeCategory"
-        @category-edit="editCategory"
-    />
-  </main>
+  <div class="categories card mx-auto mt-4 p-4">
+    <h1 class="green">Categories</h1>
+    <ul class="list-group">
+        <li v-for="category in categories" :key="category._id" class="list-group-item">
+            <Item
+            :name="category.name"
+            @remove="removeCategory(category._id)"
+            @save="(name) => { editCategory(category._id, name); }"
+        />
+        </li>
+        <li class="list-group-item">
+            <Input
+            ref="newCategoryInput"
+            @save="addCategory"
+        />
+        </li>
+    </ul>
+  </div>
 </template>
+
+<style scoped>
+.categories {
+    width: 500px;
+}
+</style>

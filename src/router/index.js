@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
-import EditView from '../views/EditView.vue'
+import CategoriesView from '../views/CategoriesView.vue'
 import TasksView from '../views/TasksView.vue'
 import SaveTasks from '../components/tasks/Save.vue'
 
@@ -23,9 +23,9 @@ const router = createRouter({
       },
     },
     {
-      path: '/edit',
-      name: 'edit',
-      component: EditView,
+      path: '/categories',
+      name: 'categories',
+      component: CategoriesView,
       meta: {
         requiresAuth: true,
       },
