@@ -12,6 +12,7 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
+      meta: { requiresAuth: false },
     },
     {
       path: '/logout',
@@ -66,9 +67,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-  if (to.meta.requiresAuth && localStorage.getItem('user_id') === null) {
+  if (to.meta.requiresAuth && localStorage.getItem('token') === null) {
     return {
+      path: '/login',
       name: 'login',
+      component: LoginView,
+      meta: { requiresAuth: false },
     }
   }
 })
