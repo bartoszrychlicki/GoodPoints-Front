@@ -1,5 +1,4 @@
 <script>
-// import CategoryManager from '../components/category/Manager.vue'
 import Item from '../components/category/Item.vue';
 import Input from '../components/category/Input.vue';
 import axios from 'axios'
