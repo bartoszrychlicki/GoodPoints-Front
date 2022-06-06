@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
-import EditView from '../views/EditView.vue'
+import CategoriesView from '../views/CategoriesView.vue'
 import TasksView from '../views/TasksView.vue'
 import SaveTasks from '../components/tasks/Save.vue'
 
@@ -12,6 +12,7 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
+      meta: { requiresAuth: false },
     },
     {
       path: '/logout',
@@ -22,9 +23,9 @@ const router = createRouter({
       },
     },
     {
-      path: '/edit',
-      name: 'edit',
-      component: EditView,
+      path: '/categories',
+      name: 'categories',
+      component: CategoriesView,
       meta: {
         requiresAuth: true,
       },
@@ -66,9 +67,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-  if (to.meta.requiresAuth && localStorage.getItem('user_id') === null) {
+  if (to.meta.requiresAuth && localStorage.getItem('token') === null) {
     return {
+      path: '/login',
       name: 'login',
+      component: LoginView,
+      meta: { requiresAuth: false },
     }
   }
 })
