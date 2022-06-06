@@ -66,9 +66,8 @@ export default {
 
                 })
         },
-        updateTask() {
-          console.log('update task');
-          axios.put(TASKS_API_URL + "/" + this.id, {name: this.form.name, user: USER_ID, category: this.form.category}, defaultRequestConfig)
+        updateTask(id) {
+          axios.put(TASKS_API_URL + "/" + id, {name: this.form.name, user: USER_ID, category: this.form.category}, defaultRequestConfig)
               .then((response) => {
                   alert('task updated')
                   this.$router.push({ name: "tasks"})
@@ -116,7 +115,7 @@ export default {
       </select>
     </div>
     <button type="submit" class="btn btn-primary" @click="addTask" v-if="this.id == ''">Save</button>
-    <button type="submit" class="btn btn-primary" @click="updateTask" v-else>Update</button>
+    <button type="submit" class="btn btn-primary" @click="updateTask(this.id)" v-else>Update</button>
   </div>
 </template>
 <style scoped>
