@@ -80,9 +80,9 @@ export default {
         <table class="table table-bordered" v-if="tasks.length">
             <thead>
                 <tr>
-                    <th>Task Name</th>
-                    <th>Category Name</th>
-                    <th>Task Status</th>
+                    <th>Taske</th>
+                    <th>Category</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -94,11 +94,11 @@ export default {
                         <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something">
                     </td>
                     <td>
-                        <RouterLink :to="{ name: 'edit-task', params: {id: task._id, name: task.name, category: task.category._id } }" class="btn btn-primary btn-sm float-end">
+                        <RouterLink :to="{ name: 'edit-task', params: {id: task._id, name: task.name, category: task.category._id } }" class="btn btn-primary btn-sm float-start">
                             <IconAdd />
                         </RouterLink>
                         <!-- <IconAdd /> -->
-                        <button class="btn btn-danger btn-sm float-start" @click="deleteTask(task)">
+                        <button class="btn btn-danger btn-sm float-end" @click="deleteTask(task)">
                             <IconTrash />
                         </button>
                     </td>
