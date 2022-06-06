@@ -1,4 +1,5 @@
 <template>
+<div class="forms card mx-auto mt-4 p-4">
   <div v-if="info" class="alert alert-success" role="alert">{{ info }}</div>
   <div v-if="error" class="alert alert-danger" role="alert">{{ error }}</div>
   <form @submit.prevent="onSubmit">
@@ -48,6 +49,8 @@
     </div>
     <input class="btn btn-primary" type="submit" value="Register" />
   </form>
+</div>
+  
 </template>
 
 <script>

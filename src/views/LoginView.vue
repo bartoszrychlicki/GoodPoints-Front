@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <main class="forms card mx-auto mt-4 p-4">
+  <main>
     <RegisterUser />
     <LoginUser />
   </main>

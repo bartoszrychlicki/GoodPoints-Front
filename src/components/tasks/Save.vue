@@ -1,28 +1,29 @@
 <script>
-import axios from 'axios'
+import axios from "axios";
 
-const USER_ID = localStorage.getItem('user_id');
+const USER_ID = localStorage.getItem("user_id");
 const TASKS_API_URL = import.meta.env.VITE_API_BASE_URL + "/taskTypes";
-const CATEGORIES_SUB_API_URL = import.meta.env.VITE_API_BASE_URL + "/categories";
+const CATEGORIES_SUB_API_URL =
+  import.meta.env.VITE_API_BASE_URL + "/categories";
 
 const defaultRequestConfig = {
-    headers: {
-        'x-auth-token': localStorage.getItem('token'),
-        'Content-Type': 'application/json'
-    }
+  headers: {
+    "x-auth-token": localStorage.getItem("token"),
+    "Content-Type": "application/json",
+  },
 };
 
 export default {
   mounted() {
-      axios
-          .get(CATEGORIES_SUB_API_URL, defaultRequestConfig)
-          .then((response) => {
-            this.categories = response.data;
-          })
-          .catch((error) => {
-            // TODO: on 403 redirect to login
-            // TODO: on other errors redirect to error page
-          })
+    axios
+      .get(CATEGORIES_SUB_API_URL, defaultRequestConfig)
+      .then((response) => {
+        this.categories = response.data;
+      })
+      .catch((error) => {
+        // TODO: on 403 redirect to login
+        // TODO: on other errors redirect to error page
+      });
   },
   props: {
         id: {
@@ -102,9 +103,14 @@ export default {
     </div>
     <div class="mb-3 mt-3">
       <label for="sel1" class="form-label">Select Category (select one):</label>
-      <select class="form-select" id="sel1" name="sellist1" v-model="form.category">
+      <select
+        class="form-select"
+        id="sel1"
+        name="sellist1"
+        v-model="form.category"
+      >
         <option disabled>Select Category</option>
-        <option v-for="category in categories" v-bind:value="category._id">
+        <option v-for="category in categories" :key="category._id" v-bind:value="category._id">
           {{ category.name }}
         </option>
       </select>
@@ -112,7 +118,6 @@ export default {
     <button type="submit" class="btn btn-primary" @click="addTask" v-if="this.id == ''">Save</button>
     <button type="submit" class="btn btn-primary" @click="updateTask" v-else>Update</button>
   </div>
-  
 </template>
 <style scoped>
 .save-task {
