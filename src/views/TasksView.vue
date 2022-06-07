@@ -80,9 +80,8 @@ export default {
         <table class="table table-bordered" v-if="tasks.length">
             <thead>
                 <tr>
-                    <th>Taske</th>
+                    <th>Task</th>
                     <th>Category</th>
-                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -90,9 +89,6 @@ export default {
                 <tr v-for="task in tasks" :key="task._id">
                     <td>{{ task.name }}</td>
                     <td>{{ task.category.name }}</td>
-                    <td class="text-center">
-                        <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something">
-                    </td>
                     <td>
                         <RouterLink :to="{ name: 'edit-task', params: {id: task._id, name: task.name, category: task.category._id } }" class="btn btn-primary btn-sm float-start">
                             <IconAdd />
