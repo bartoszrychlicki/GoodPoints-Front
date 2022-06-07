@@ -80,21 +80,23 @@ export default {
         <table class="table table-bordered" v-if="activityTypes.length">
             <thead>
                 <tr>
+                    <th>Reward</th>
                     <th>Task</th>
-                    <th>Category</th>
+                    <th>Description</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="activityType in activityTypes" :key="activityType._id">
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.category.name }}</td>
+                    <td>{{ activityType.reward }}</td>
+                    <td>{{ activityType.task }}</td>
+                    <td>{{ activityType.description }}</td>
                     <td>
-                        <RouterLink :to="{ name: 'edit-task', params: {id: task._id, name: task.name, category: task.category._id } }" class="btn btn-primary btn-sm float-start">
+                        <RouterLink :to="{ name: 'edit-task', params: {id: activityType._id, task: activityType.task, description: activityType.description } }" class="btn btn-primary btn-sm float-start">
                             <IconAdd />
                         </RouterLink>
                         <!-- <IconAdd /> -->
-                        <button class="btn btn-danger btn-sm float-end" @click="deleteTask(task)">
+                        <button class="btn btn-danger btn-sm float-end" @click="deleteTask(activityType)">
                             <IconTrash />
                         </button>
                     </td>
@@ -109,7 +111,7 @@ export default {
 </template>
 
 <style scoped>
-.tasks {
-    width: 1000px;
+.activityTypes {
+    width: 700px;
 }
 </style>
