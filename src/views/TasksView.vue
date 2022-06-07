@@ -21,6 +21,7 @@ export default {
         axios
           .get(TASKS_API_URL, defaultRequestConfig)
           .then((response) => {
+              console.log(response.data)
             this.tasks = response.data;
           })
           .catch((error) => {
@@ -82,6 +83,7 @@ export default {
                 <tr>
                     <th>Task</th>
                     <th>Category</th>
+                    <th>Activity Types</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -89,6 +91,16 @@ export default {
                 <tr v-for="task in tasks" :key="task._id">
                     <td>{{ task.name }}</td>
                     <td>{{ task.category.name }}</td>
+                    <td>
+                        <div>
+                            <div v-for="activityType in task.activitytypes" :key="activityType">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something">
+                                    <label class="form-check-label">{{ activityType.description }}</label>
+                                </div> 
+                            </div>
+                        </div>
+                    </td>
                     <td>
                         <RouterLink :to="{ name: 'edit-task', params: {id: task._id, name: task.name, category: task.category._id } }" class="btn btn-primary btn-sm float-start">
                             <IconAdd />
@@ -110,6 +122,6 @@ export default {
 
 <style scoped>
 .tasks {
-    width: 500px;
+    width: 800px;
 }
 </style>
