@@ -135,7 +135,7 @@ export default {
     <!-- Add activities for task -->
 
     <h1 class="green">
-      {{ this.id ? "Update" : "Add"}} Activities for Task
+      {{ this.id ? "Update" : "Add"}} Activity Types
     </h1>
 
     <div class="form-group mb-3" v-for="(activity, counter) in form.activities" v-bind:key="counter">
