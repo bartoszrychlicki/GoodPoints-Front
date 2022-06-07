@@ -68,8 +68,6 @@ export default {
                 ).then((response) => {
                     // alert("new task added.");
                     // this.$router.push({ name: "tasks"})
-                    console.log(response.data);
-                    console.log(this.form.activities.length)
                     for (let index = 0; index < this.form.activities.length; index++) {
                         axios.post(ACTIVITY_TYPES_API_URL, 
                             {
@@ -78,7 +76,8 @@ export default {
                                 description: this.form.activities[index].description,
                             }, defaultRequestConfig)
                           .then((response) => {
-                              console.log("new activity type added.");
+                              alert("new task and activity types added successfully!.");
+                              this.$router.push({ name: "tasks"})
                               // this.$router.push({ name: "activity-types"})
                           })
                           .catch((error) => {
