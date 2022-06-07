@@ -148,7 +148,6 @@ export default {
         name="name"
         v-model="form.name"
       />
-      <span v-if="form.errors().has('name')" v-text="form.errors().get('name')"></span>
     </div>
     <div class="mb-3 mt-3">
       <label for="sel1" class="form-label">Select Category (select one):</label>
