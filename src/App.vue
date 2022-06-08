@@ -21,6 +21,9 @@
           <RouterLink to="/tasks">Tasks</RouterLink>
         </li>
         <li class="nav-item">
+          <RouterLink to="/activity-types">Activity Types</RouterLink>
+        </li>
+        <li class="nav-item">
           <RouterLink to="/logout">Log out</RouterLink>
         </li>
       </ul>

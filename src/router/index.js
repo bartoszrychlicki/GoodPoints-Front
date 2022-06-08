@@ -4,6 +4,8 @@ import LoginView from '../views/LoginView.vue'
 import CategoriesView from '../views/CategoriesView.vue'
 import TasksView from '../views/TasksView.vue'
 import SaveTasks from '../components/tasks/Save.vue'
+import ActivityTypeView from '../views/ActivityTypeView.vue'
+import SaveActivityType from '../components/activityType/Save.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,6 +56,22 @@ const router = createRouter({
         requiresAuth: true,
       },
       props:true
+    },
+    {
+      path: '/activity-types',
+      name: 'activity-types',
+      component: ActivityTypeView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/save-activity-type',
+      name: 'save-activity-type',
+      component: SaveActivityType,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/',
