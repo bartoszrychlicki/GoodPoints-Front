@@ -22,14 +22,7 @@ export default {
         axios
           .get(TASKS_API_URL, defaultRequestConfig)
           .then((response) => {
-              console.log(response.data)
             this.tasks = response.data;
-
-            this.resultTasks = this.tasks.reduce(function (r, a) {
-                    r[a.category.name] = r[a.category.name] || [];
-                    r[a.category.name].push(a);
-                    return r;
-                }, Object.create(null));
           })
           .catch((error) => {
             // TODO: on 403 redirect to login
@@ -52,7 +45,6 @@ export default {
             tasks: [],
             categories: [],
             isModalVisible: false,
-            resultTasks: [],
             selectedActivityType: [],
             activityDescription: '',
         }
@@ -136,19 +128,29 @@ export default {
             </tbody>
         </table>  -->
         <div v-if="tasks.length">
-            <div v-for="(task, index)  in resultTasks" :key="task" class="card">
-                <div class="card-body"><h2>{{ index }}</h2></div>
-                <div v-for="taskType in task" :key="taskType">
-                    <div class="card-header"><h5>{{ taskType.name }}</h5></div>
-                    <div v-for="activityType in taskType.activitytypes" :key="activityType" class="card-body mb-3">
-                        <input 
-                            class="form-check-input" 
-                            type="checkbox" id="check1" 
-                            name="option1" 
-                            value="something"
-                            @change="showModal(activityType)"
-                        > &nbsp;&nbsp;
-                        <label class="form-check-label"> {{ activityType.description }}</label>
+            <div v-for="(task, index)  in tasks" :key="task">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h2>{{ task.category.name }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>{{ task.name }}</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div v-for="activityType in task.activityTypes" :key="activityType" class="card-body mb-3">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="checkbox" id="check1" 
+                                        name="option1" 
+                                        value="something"
+                                        @change="showModal(activityType)"
+                                    > &nbsp;&nbsp;
+                                    <label class="form-check-label"> {{ activityType.description }} ({{ activityType.reward }})</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
