@@ -77,6 +77,7 @@ export default {
                 alert("Activity done successfully!.");
                 this.activityDescription = ''
                 this.selectedActivityType = []
+                this.isModalVisible = false;
                 // this.$router.push({ name: "tasks"})
                 // this.$router.push({ name: "activity-types"})
             })
