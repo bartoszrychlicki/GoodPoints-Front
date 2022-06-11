@@ -9,6 +9,7 @@ import Modal from '@/components/modal/Modal.vue';
 const USER_ID = localStorage.getItem('user_id');
 const TASKS_API_URL = import.meta.env.VITE_API_BASE_URL + "/taskTypes";
 const CATEGORIES_SUB_API_URL = import.meta.env.VITE_API_BASE_URL + "/categories";
+const ACTIVITY_API_URL = import.meta.env.VITE_API_BASE_URL + "/activities";
 
 const defaultRequestConfig = {
     headers: {
@@ -19,20 +20,35 @@ const defaultRequestConfig = {
 
 export default {
     mounted() {
+        // Get tasks
         axios
           .get(TASKS_API_URL, defaultRequestConfig)
           .then((response) => {
             this.tasks = response.data;
+            console.log(this.tasks)
           })
           .catch((error) => {
             // TODO: on 403 redirect to login
             // TODO: on other errors redirect to error page
           })
 
+        // Get Categories
         axios
           .get(CATEGORIES_SUB_API_URL, defaultRequestConfig)
           .then((response) => {
             this.categories = response.data;
+          })
+          .catch((error) => {
+            // TODO: on 403 redirect to login
+            // TODO: on other errors redirect to error page
+          })
+
+          // Get activities
+        axios
+          .get(ACTIVITY_API_URL, defaultRequestConfig)
+          .then((response) => {
+            this.activities = response.data;
+            console.log(this.activities);
           })
           .catch((error) => {
             // TODO: on 403 redirect to login
@@ -44,6 +60,7 @@ export default {
             nextId: 4,
             tasks: [],
             categories: [],
+            activities: [],
             isModalVisible: false,
             selectedActivityType: [],
             activityDescription: '',
@@ -51,7 +68,25 @@ export default {
     },
     methods: {
         doneTaskType () {
-
+            axios.post(ACTIVITY_API_URL, 
+            {
+                activityType: this.selectedActivityType._id, 
+                description: this.activityDescription,
+            }, defaultRequestConfig)
+            .then((response) => {
+                alert("Activity done successfully!.");
+                this.activityDescription = ''
+                this.selectedActivityType = []
+                // this.$router.push({ name: "tasks"})
+                // this.$router.push({ name: "activity-types"})
+            })
+            .catch((error) => {
+                // TODO: on 403 redirect to login
+                // TODO: on other errors redirect to error page
+                if (error.response) {
+                    console.log(error.response.data)
+                }
+            })
         },
         undoneTaskType () {
 
@@ -59,7 +94,6 @@ export default {
         showModal(activityType) {
             this.isModalVisible = true;
             this.selectedActivityType = activityType
-            console.log(activityType);
         },
         closeModal() {
             this.isModalVisible = false;
@@ -184,9 +218,6 @@ export default {
             <div>
                 <button class="btn btn-primary btn-sm" @click="doneTaskType()">
                     Done
-                </button>
-                <button class="btn btn-danger btn-sm float-end" @click="undoneTaskType()">
-                    Undone
                 </button>
             </div>
         </template>
