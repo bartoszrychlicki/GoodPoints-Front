@@ -72,7 +72,7 @@ export default {
                         axios.post(ACTIVITY_TYPES_API_URL, 
                             {
                                 reward: this.form.activities[index].reward, 
-                                tasktype: response.data._id,
+                                taskType: response.data._id,
                                 description: this.form.activities[index].description,
                             }, defaultRequestConfig)
                           .then((response) => {
