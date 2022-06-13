@@ -49,23 +49,23 @@ export default {
         editTask(task) {
             
         },
-        deleteTask(task) {
-            if (task) {
-                console.log(task);
-                axios
-                    .delete(TASKS_API_URL + "/" + task._id, defaultRequestConfig)
-                    .then((response) => {
-                        this.tasks.splice(task._id, 1);
-                    })
-                    .catch((error) => {
-                        // TODO: on 403 redirect to login
-                        // TODO: on other errors redirect to error page
-                        console.log(error.response.data);
-                    })
-            } else {
-                console.log('taks not deleted');
-            }
-        }
+        // deleteTask(task) {
+        //     if (task) {
+        //         console.log(task);
+        //         axios
+        //             .delete(TASKS_API_URL + "/" + task._id, defaultRequestConfig)
+        //             .then((response) => {
+        //                 this.tasks.splice(task._id, 1);
+        //             })
+        //             .catch((error) => {
+        //                 // TODO: on 403 redirect to login
+        //                 // TODO: on other errors redirect to error page
+        //                 console.log(error.response.data);
+        //             })
+        //     } else {
+        //         console.log('taks not deleted');
+        //     }
+        // }
     },
     components: {Save, IconTrash, IconAdd}
 }
@@ -96,9 +96,9 @@ export default {
                             <IconAdd />
                         </RouterLink>
                         <!-- <IconAdd /> -->
-                        <button class="btn btn-danger btn-sm float-end" @click="deleteTask(activityType)">
+                        <!-- <button class="btn btn-danger btn-sm float-end" @click="deleteTask(activityType)">
                             <IconTrash />
-                        </button>
+                        </button> -->
                     </td>
                 </tr>
             </tbody>
