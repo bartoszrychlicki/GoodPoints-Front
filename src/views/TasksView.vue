@@ -9,6 +9,7 @@ import Modal from '@/components/modal/Modal.vue';
 const USER_ID = localStorage.getItem('user_id');
 const TASKS_API_URL = import.meta.env.VITE_API_BASE_URL + "/taskTypes";
 const CATEGORIES_SUB_API_URL = import.meta.env.VITE_API_BASE_URL + "/categories";
+const ACTIVITY_API_URL = import.meta.env.VITE_API_BASE_URL + "/activities";
 
 const defaultRequestConfig = {
     headers: {
@@ -19,27 +20,35 @@ const defaultRequestConfig = {
 
 export default {
     mounted() {
+        // Get tasks
         axios
           .get(TASKS_API_URL, defaultRequestConfig)
           .then((response) => {
-              console.log(response.data)
             this.tasks = response.data;
-
-            this.resultTasks = this.tasks.reduce(function (r, a) {
-                    r[a.category.name] = r[a.category.name] || [];
-                    r[a.category.name].push(a);
-                    return r;
-                }, Object.create(null));
+            console.log(this.tasks)
           })
           .catch((error) => {
             // TODO: on 403 redirect to login
             // TODO: on other errors redirect to error page
           })
 
+        // Get Categories
         axios
           .get(CATEGORIES_SUB_API_URL, defaultRequestConfig)
           .then((response) => {
             this.categories = response.data;
+          })
+          .catch((error) => {
+            // TODO: on 403 redirect to login
+            // TODO: on other errors redirect to error page
+          })
+
+          // Get activities
+        axios
+          .get(ACTIVITY_API_URL, defaultRequestConfig)
+          .then((response) => {
+            this.activities = response.data;
+            console.log(this.activities);
           })
           .catch((error) => {
             // TODO: on 403 redirect to login
@@ -51,15 +60,34 @@ export default {
             nextId: 4,
             tasks: [],
             categories: [],
+            activities: [],
             isModalVisible: false,
-            resultTasks: [],
             selectedActivityType: [],
             activityDescription: '',
         }
     },
     methods: {
         doneTaskType () {
-
+            axios.post(ACTIVITY_API_URL, 
+            {
+                activityType: this.selectedActivityType._id, 
+                description: this.activityDescription,
+            }, defaultRequestConfig)
+            .then((response) => {
+                alert("Activity done successfully!.");
+                this.activityDescription = ''
+                this.selectedActivityType = []
+                this.isModalVisible = false;
+                // this.$router.push({ name: "tasks"})
+                // this.$router.push({ name: "activity-types"})
+            })
+            .catch((error) => {
+                // TODO: on 403 redirect to login
+                // TODO: on other errors redirect to error page
+                if (error.response) {
+                    console.log(error.response.data)
+                }
+            })
         },
         undoneTaskType () {
 
@@ -67,7 +95,6 @@ export default {
         showModal(activityType) {
             this.isModalVisible = true;
             this.selectedActivityType = activityType
-            console.log(activityType);
         },
         closeModal() {
             this.isModalVisible = false;
@@ -136,19 +163,29 @@ export default {
             </tbody>
         </table>  -->
         <div v-if="tasks.length">
-            <div v-for="(task, index)  in resultTasks" :key="task" class="card">
-                <div class="card-body"><h2>{{ index }}</h2></div>
-                <div v-for="taskType in task" :key="taskType">
-                    <div class="card-header"><h5>{{ taskType.name }}</h5></div>
-                    <div v-for="activityType in taskType.activitytypes" :key="activityType" class="card-body mb-3">
-                        <input 
-                            class="form-check-input" 
-                            type="checkbox" id="check1" 
-                            name="option1" 
-                            value="something"
-                            @change="showModal(activityType)"
-                        > &nbsp;&nbsp;
-                        <label class="form-check-label"> {{ activityType.description }}</label>
+            <div v-for="(task, index)  in tasks" :key="task">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h2>{{ task.category.name }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>{{ task.name }}</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div v-for="activityType in task.activityTypes" :key="activityType" class="card-body mb-3">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="checkbox" id="check1" 
+                                        name="option1" 
+                                        value="something"
+                                        @change="showModal(activityType)"
+                                    > &nbsp;&nbsp;
+                                    <label class="form-check-label"> {{ activityType.description }} ({{ activityType.reward }})</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -182,9 +219,6 @@ export default {
             <div>
                 <button class="btn btn-primary btn-sm" @click="doneTaskType()">
                     Done
-                </button>
-                <button class="btn btn-danger btn-sm float-end" @click="undoneTaskType()">
-                    Undone
                 </button>
             </div>
         </template>

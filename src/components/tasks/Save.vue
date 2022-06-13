@@ -72,11 +72,11 @@ export default {
                         axios.post(ACTIVITY_TYPES_API_URL, 
                             {
                                 reward: this.form.activities[index].reward, 
-                                tasktype: response.data._id,
+                                taskType: response.data._id,
                                 description: this.form.activities[index].description,
                             }, defaultRequestConfig)
                           .then((response) => {
-                              alert("new task and activity types added successfully!.");
+                              // alert("new task and activity types added successfully!.");
                               this.$router.push({ name: "tasks"})
                               // this.$router.push({ name: "activity-types"})
                           })
